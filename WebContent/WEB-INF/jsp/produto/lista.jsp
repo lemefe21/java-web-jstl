@@ -28,16 +28,18 @@
 			<td>Preco</td>
 			<td>Descricao</td>
 			<td>Data de Inicio da Venda</td>
+			<td>Contator Linha</td>
 			<td width="20%">Remover?</td>
 		</tr>
 		
-		<c:forEach var="p" items="${produtoList}">
+		<c:forEach var="p" items="${produtoList}" varStatus="st">
 		
 			<tr id="produto${p.id}">
 				<td>${p.nome}</td>
 				<td>${p.preco}</td>
 				<td>${p.descricao}</td>
 				<td>${p.dataInicioVenda.time}</td>
+				<td>${st.count}</td>
 				<td><a href="#" onclick="return removeProduto(${p.id})">Remover</a></td>
 			</tr>
 			
