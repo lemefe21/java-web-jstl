@@ -5,6 +5,7 @@
 
 <html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <head>
 	<script type="text/javascript" src="<c:url value="/js/jquery.js"/>"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,22 +30,43 @@
 			<td>Descricao</td>
 			<td>Data de Inicio da Venda</td>
 			<td>Contator Linha</td>
+			<td>Usado</td>
 			<td width="20%">Remover?</td>
 		</tr>
 		
 		<c:forEach var="p" items="${produtoList}" varStatus="st">
 		
 			<tr id="produto${p.id}">
-				<td>${p.nome}</td>
-				<td>${p.preco}</td>
+				<td>${p.nome.toUpperCase()}</td>
+				<td>
+					<fmt:formatNumber value="${p.preco}" type="currency"/>
+				</td>
 				<td>${p.descricao}</td>
-				<td>${p.dataInicioVenda.time}</td>
+				<td>
+					<fmt:formatDate value="${p.dataInicioVenda.time}" pattern="EEEE, dd 'de' MMMM 'de' yyyy"/>
+				</td>
 				<td>${st.count}</td>
+				
+				<c:choose>
+					<c:when test="${p.usado}">
+						<td>Sim</td>
+					</c:when>
+					<c:otherwise>
+						<td>Não</td>
+					</c:otherwise>
+				</c:choose>
+				
 				<td><a href="#" onclick="return removeProduto(${p.id})">Remover</a></td>
 			</tr>
 			
 		</c:forEach>
 	</table>
-	<a href="/produtos/produto/formulario">Adicionar um produto</a>
+	
+	<c:url value="/produto/formulario" var="urlAdicionar"></c:url>
+	<a href="${urlAdicionar}">Adicionar um produto</a><br />
+	
+	<c:set var="nome" value="João da Silva" />
+	<c:out value="${nome}" />
+
 </body>
 </html>
