@@ -21,6 +21,7 @@
 	</script>
 
 	<h1>Produtos</h1>
+	<h2><fmt:message key="mensagem.bemVindo"/></h2>
 	<div id="mensagem"></div>
 	<table width="100%">
 	
@@ -63,10 +64,12 @@
 	</table>
 	
 	<c:url value="/produto/formulario" var="urlAdicionar"></c:url>
-	<a href="${urlAdicionar}">Adicionar um produto</a><br />
+	<a href="${urlAdicionar}"><fmt:message key="mensagem.novoProduto"/></a><br />
 	
 	<c:set var="nome" value="João da Silva" />
 	<c:out value="${nome}" />
+	
+	<c:import url="../_comum/rodape.jsp"></c:import>
 
 </body>
 </html>
